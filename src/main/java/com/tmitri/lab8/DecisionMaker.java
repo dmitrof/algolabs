@@ -1,12 +1,9 @@
-package lab8;
+package com.tmitri.lab8;
 
 import com.sun.istack.internal.Nullable;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.InternalError;
-import com.sun.org.apache.xalan.internal.xsltc.util.IntegerArray;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -30,7 +27,7 @@ public class DecisionMaker {
         printResult("МаксМакс", matrix, maxMaxAlt);
 
         int maxMInAlt = wald(matrix);
-        printResult("Максимин (Вальд)", matrix, maxMInAlt);
+        printResult("Максиминa (Вальд)", matrix, maxMInAlt);
 
         int minMaxAlt = savidge(matrix);
         printResult("Минимакс (Сэвидж)", matrix, minMaxAlt);
@@ -115,6 +112,7 @@ public class DecisionMaker {
 
     private static int hurwitz(int matrix[][], double trust)
     {
+        System.out.println("Вычисление по критерию Гурвица");
         double maxValue = -1;
         int maxIndex = -1;
         for (int i = 0; i < matrix.length; i++) {
@@ -124,8 +122,8 @@ public class DecisionMaker {
                 min = Math.min(min, matrix[i][j]);
                 max = Math.max(max, matrix[i][j]);
             }
-            double altValue = trust * max + (1 - trust) * max;
-
+            double altValue = trust * max + (1 - trust) * min;
+            System.out.println("Максимизация для " + (i + 1) + "-й альтернативы: " + altValue);
             if (maxValue < altValue)
             {
                 maxValue = altValue;

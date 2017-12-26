@@ -101,9 +101,17 @@ public class AlgoRunner {
             System.out.println(searchName);
             int foundIndex = searcher.search(sortedArray, searchedValue);
             long timeNanos = System.nanoTime() - timeNanosStart;
-            Assert.assertTrue(sortedArray[foundIndex] == searchedValue);
-            System.out.println("Value " + searchedValue + " is found on position " + (foundIndex + 1));
-            System.out.println("Time is " + timeNanos + " nanoseconds;");
+            if (foundIndex == -1)
+            {
+                System.out.println("value " + searchedValue + " was not found");
+            }
+            else
+            {
+                Assert.assertTrue(sortedArray[foundIndex] == searchedValue);
+                System.out.println("Value " + searchedValue + " is found on position " + (foundIndex + 1));
+                System.out.println("Time is " + timeNanos + " nanoseconds;");
+            }
+
         });
 
 
